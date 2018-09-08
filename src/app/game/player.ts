@@ -1,0 +1,10 @@
+let id = 1;
+
+export class Player {
+  id: number = id++;
+  money = 10000;
+  position = 0;
+
+  constructor(public name: string, public color: string) {
+  }
+}

@@ -1,0 +1,23 @@
+<div class="tiles">
+  <ng-container [extra]="{position: 'top'}" [appDynamicTile]="tile" *ngFor="let tile of tiles.top"></ng-container>
+
+  <ng-container *ngFor="let tile of tiles.left; let i = index">
+    <ng-container [extra]="{position: 'left'}" [appDynamicTile]="tile"></ng-container>
+    <ng-container [extra]="{position: 'right'}" [appDynamicTile]="tiles.right[i]"></ng-container>
+  </ng-container>
+
+  <ng-container [extra]="{position: 'bottom'}" [appDynamicTile]="tile" *ngFor="let tile of tiles.bottom"></ng-container>
+  <div class="middle">
+
+    <div class="logs">
+      <button (click)="game.roll()">Roll</button>
+      <div class="players">
+        <div class="player" *ngFor="let p of game.players">{{p.name}} ({{p.money|currency:'USD':'symbol':'1.0-2'}}) - Pos {{p.position}}</div>
+
+        <hr>
+        <div class="log-area"><p *ngFor="let log of game.log">{{log}}</p></div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="player-pos" [color]="p.color" [appPlayerPosition]="p.position" *ngFor="let p of game.players"></div>
