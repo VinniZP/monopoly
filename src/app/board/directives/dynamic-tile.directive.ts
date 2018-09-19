@@ -34,18 +34,19 @@ export class DynamicTileDirective {
 
   @Input()
   set appDynamicTile(tile: AbstractTile) {
-    let component = TileComponent;
+    // TODO: Refactor
+    let component: any = TileComponent;
     if (tile instanceof PropertyTile) {
       component = PropertyTileComponent;
     }
 
-    const componentFactory = this.componentFactoryResolver.resolveComponentFactory(
+    const componentFactory = this.componentFactoryResolver.resolveComponentFactory<TileComponent>(
       component
     );
 
     this.viewContainerRef.clear();
 
-    this.componentRef = this.viewContainerRef.createComponent(
+    this.componentRef = this.viewContainerRef.createComponent<TileComponent>(
       componentFactory
     );
     this.componentRef.instance.tile = tile;

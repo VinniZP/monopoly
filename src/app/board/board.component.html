@@ -10,10 +10,17 @@
   <div class="middle">
 
     <div class="logs">
-      <button (click)="game.roll()">Roll</button>
+      <pre>{{actions|json}}</pre>
+      <button *ngIf="actions?.canRoll" (click)="gameController.roll()">Roll</button>
+
+      <button *ngIf="actions?.needPurchase" (click)="buy()">Buy</button>
+      <button *ngIf="actions?.needPurchase" (click)="pass()">Pass</button>
+      <button *ngIf="actions?.canEnd" (click)="endTurn()">End Turn</button>
+      <button *ngIf="actions?.canBuyOut" (click)="buyOut()">buyOut</button>
+
       <div class="players">
         <div class="player" *ngFor="let p of game.players">{{p.name}} ({{p.money|currency:'USD':'symbol':'1.0-2'}}) - Pos {{p.position}}</div>
-
+        <p>Game state: {{game.gameState}}</p>
         <hr>
         <div class="log-area"><p *ngFor="let log of game.log">{{log}}</p></div>
       </div>

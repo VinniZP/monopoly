@@ -1,17 +1,19 @@
 import { Component, ElementRef, HostBinding, Input, OnInit } from '@angular/core';
 import { AbstractTile } from '../../../game/tiles/tile';
+import { Unsubscribe } from '../../../helpers/unsubscribe';
 
 @Component({
   selector: 'app-tile',
   templateUrl: './tile.component.html',
   styleUrls: ['../tile.style.scss', './tile.component.css'],
 })
-export class TileComponent implements OnInit {
+export class TileComponent extends Unsubscribe implements OnInit {
   @Input() tile: AbstractTile;
   @HostBinding('class.tile') isTile = true;
   @HostBinding('attr.id') id;
 
   constructor(private elem: ElementRef<Element>) {
+    super();
     console.log(this._position);
   }
 
